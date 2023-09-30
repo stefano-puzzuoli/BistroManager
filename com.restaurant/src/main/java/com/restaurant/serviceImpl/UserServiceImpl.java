@@ -8,6 +8,7 @@ import com.restaurant.constants.RestaurantConstants;
 import com.restaurant.dao.UserDao;
 import com.restaurant.service.UserService;
 import com.restaurant.utils.RestaurantUtils;
+import com.restaurant.wrapper.UserWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -35,6 +38,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     JwtUtil jwtUtil;
+
+    @Autowired
+    JwtFilter jwtFilter;
 
     @Override
     public ResponseEntity<String> signUp(Map<String, String> requestMap) {
@@ -94,5 +100,19 @@ public class UserServiceImpl implements UserService {
             log.error("{}", ex);
         }
         return new ResponseEntity<String>("{\"message\":\"" + "Bad Credentials." + "\"}", HttpStatus.BAD_REQUEST);
+    }
+
+    @Override
+    public ResponseEntity<List<UserWrapper>> getAllUsers() {
+        try {
+            if (jwtFilter.isAdmin()) {
+                return new ResponseEntity<>(userDao.getAllUsers(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(new ArrayList<>(), HttpStatus.UNAUTHORIZED);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
