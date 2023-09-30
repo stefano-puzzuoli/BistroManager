@@ -12,6 +12,8 @@ import java.io.Serializable;
 @NamedQuery(name = "User.findByEmailId", query = "select u from User u where u.email=:email")
 @NamedQuery(name = "User.getAllUsers", query = "select new com.restaurant.wrapper.UserWrapper(u.id, u.name, u.contactNumber, u.email, u.status) from User u where u.role='user'")
 @NamedQuery(name = "User.updateStatus", query = "update User u set u.status=:status where u.id=:id")
+@NamedQuery(name = "User.getAllAdmins", query = "select u.email from User u where u.role='admin'")
+
 
 @Data
 @Entity

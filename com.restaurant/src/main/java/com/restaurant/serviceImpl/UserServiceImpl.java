@@ -7,6 +7,7 @@ import com.restaurant.POJO.User;
 import com.restaurant.constants.RestaurantConstants;
 import com.restaurant.dao.UserDao;
 import com.restaurant.service.UserService;
+import com.restaurant.utils.EmailUtils;
 import com.restaurant.utils.RestaurantUtils;
 import com.restaurant.wrapper.UserWrapper;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +39,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     JwtFilter jwtFilter;
+
+    @Autowired
+    EmailUtils emailUtils;
 
     @Override
     public ResponseEntity<String> signUp(Map<String, String> requestMap) {
@@ -120,6 +124,9 @@ public class UserServiceImpl implements UserService {
                 Optional<User> optional = userDao.findById(Integer.parseInt(requestMap.get("id")));
                 if (!optional.isEmpty()) {
                     userDao.updateStatus(requestMap.get("status"), Integer.parseInt(requestMap.get("id")));
+                    // Need to add password in applications.properties to make use of this feature
+                    // sendEmailtoAllAdmins(requestMap.get("status"), optional.get().getEmail(), userDao.getAllAdmins());
+
                     return RestaurantUtils.getResponseEntity("User status updated successfully", HttpStatus.OK);
                 } else {
                     return RestaurantUtils.getResponseEntity("User id does not exist", HttpStatus.OK);
@@ -131,5 +138,14 @@ public class UserServiceImpl implements UserService {
             ex.printStackTrace();
         }
         return RestaurantUtils.getResponseEntity(RestaurantConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    private void sendEmailtoAllAdmins(String status, String user, List<String> allAdmins) {
+        allAdmins.remove(jwtFilter.getCurrentUser());
+        if (status != null && status.equalsIgnoreCase("true")) {
+            emailUtils.sendSimpleMessage(jwtFilter.getCurrentUser(), "Account Approved", "USER:- " + user + " \n is approved by \nADMIN:-" + jwtFilter.getCurrentUser(), allAdmins);
+        } else {
+            emailUtils.sendSimpleMessage(jwtFilter.getCurrentUser(), "Account Disabled", "USER:- " + user + " \n is disabled by \nADMIN:-" + jwtFilter.getCurrentUser(), allAdmins);
+        }
     }
 }
