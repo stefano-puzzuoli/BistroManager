@@ -110,12 +110,12 @@ public class UserServiceImpl implements UserService {
             if (jwtFilter.isAdmin()) {
                 return new ResponseEntity<>(userDao.getAllUsers(), HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(new ArrayList<>(), HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<>(Collections.emptyList(), HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(Collections.emptyList(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Override
