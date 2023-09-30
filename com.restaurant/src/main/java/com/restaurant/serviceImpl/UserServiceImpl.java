@@ -1,5 +1,6 @@
 package com.restaurant.serviceImpl;
 
+import com.google.common.base.Strings;
 import com.restaurant.JWT.CustomerUsersDetailsService;
 import com.restaurant.JWT.JwtFilter;
 import com.restaurant.JWT.JwtUtil;
@@ -167,6 +168,22 @@ public class UserServiceImpl implements UserService {
                 return RestaurantUtils.getResponseEntity("Incorrect old password", HttpStatus.BAD_REQUEST);
             }
             return RestaurantUtils.getResponseEntity(RestaurantConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return RestaurantUtils.getResponseEntity(RestaurantConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<String> forgotPassword(Map<String, String> requestMap) {
+        try {
+            User user = userDao.findByEmailId(requestMap.get("email"));
+            if (user != null && !Strings.isNullOrEmpty(user.getEmail())) {
+                // Need to add password in applications.properties to make use of this feature
+                // emailUtils.forgotPasswordEmail(user.getEmail(), "Credentials by Restaurant Management System", user.getPassword());
+            }
+            return RestaurantUtils.getResponseEntity("Check your email for credentials.", HttpStatus.OK);
 
         } catch (Exception ex) {
             ex.printStackTrace();
