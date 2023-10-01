@@ -8,6 +8,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @NamedQuery(name = "Product.getAllProducts", query = "select new com.restaurant.wrapper.ProductWrapper(p.id, p.name, p.description, p.price, p.status, p.category.id, p.category.name) from Product p")
+@NamedQuery(name = "Product.getByCategory", query = "select new com.restaurant.wrapper.ProductWrapper(p.id, p.name) from Product p where p.category.id=:categoryId and p.status='true'")
+@NamedQuery(name = "Product.getByProductId", query = "select new com.restaurant.wrapper.ProductWrapper(p.id, p.name, p.description, p.price) from Product p where p.id=:id")
 
 
 @Data
