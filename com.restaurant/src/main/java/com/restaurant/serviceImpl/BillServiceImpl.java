@@ -1,5 +1,6 @@
 package com.restaurant.serviceImpl;
 
+import com.google.common.base.Strings;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.JsonAdapter;
 import com.itextpdf.text.*;
@@ -13,6 +14,7 @@ import com.restaurant.dao.BillDao;
 import com.restaurant.service.BillService;
 import com.restaurant.utils.RestaurantUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.pdfbox.io.IOUtils;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,8 +22,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.lang.annotation.Documented;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -41,7 +48,7 @@ public class BillServiceImpl implements BillService {
         try {
             String fileName;
             if (validateRequestMap(requestMap)) {
-                if (requestMap.containsKey("isGenerate") && !(boolean) requestMap.get("isGenerate")) {
+                if (requestMap.containsKey("isGenerate") && !(Boolean) requestMap.get("isGenerate")) {
                     fileName = (String) requestMap.get("uuid");
                 } else {
                     fileName = RestaurantUtils.getUUID();
@@ -86,6 +93,53 @@ public class BillServiceImpl implements BillService {
             ex.printStackTrace();
         }
         return RestaurantUtils.getResponseEntity(RestaurantConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<List<Bill>> getBills() {
+        try {
+            List<Bill> bills;
+            if (jwtFilter.isAdmin()) {
+                bills = billDao.getAllBills();
+            }
+            else {
+                bills = billDao.getBillsByUsername(jwtFilter.getCurrentUser());
+            }
+            return new ResponseEntity<>(bills, HttpStatus.OK);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity<>(Collections.emptyList(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<byte[]> getPdf(Map<String, Object> requestMap) {
+        log.info("Inside getPdf : requestMap {}", requestMap);
+        try {
+            byte[] pdfByteArray = new byte[0];
+            if (!requestMap.containsKey("uuid") && validateRequestMap(requestMap)) {
+                return new ResponseEntity<>(pdfByteArray, HttpStatus.BAD_REQUEST);
+            }
+            String filePath = RestaurantConstants.SAVE_LOCATION + "\\" + (String) requestMap.get("uuid") + ".pdf";
+            if (!RestaurantUtils.doesFileExist(filePath)) {
+                requestMap.put("isGenerate", false);
+                generateReport(requestMap);
+            }
+            pdfByteArray = getPdfByteArray(filePath);
+            return new ResponseEntity<>(pdfByteArray, HttpStatus.OK);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
+
+    private byte[] getPdfByteArray(String filePath) throws Exception {
+        File file = new File(filePath);
+        InputStream targetStream = new FileInputStream(file);
+        byte[] pdfByteArray = IOUtils.toByteArray(targetStream);
+        targetStream.close();
+        return pdfByteArray;
     }
 
     private void addRows(PdfPTable table, Map<String, Object> data) {
