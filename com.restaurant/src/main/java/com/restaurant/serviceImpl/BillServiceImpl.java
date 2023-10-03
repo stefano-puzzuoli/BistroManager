@@ -26,10 +26,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.lang.annotation.Documented;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
 
 @Slf4j
@@ -74,7 +72,7 @@ public class BillServiceImpl implements BillService {
 
                 JSONArray jsonArray = new JSONArray((String) requestMap.get("productDetails"));
 
-                for(int i = 0; i < jsonArray.length(); i++) {
+                for (int i = 0; i < jsonArray.length(); i++) {
                     addRows(table, RestaurantUtils.getMapFromJson(jsonArray.getString(i)));
                 }
 
@@ -101,8 +99,7 @@ public class BillServiceImpl implements BillService {
             List<Bill> bills;
             if (jwtFilter.isAdmin()) {
                 bills = billDao.getAllBills();
-            }
-            else {
+            } else {
                 bills = billDao.getBillsByUsername(jwtFilter.getCurrentUser());
             }
             return new ResponseEntity<>(bills, HttpStatus.OK);
@@ -134,6 +131,22 @@ public class BillServiceImpl implements BillService {
         return null;
     }
 
+    @Override
+    public ResponseEntity<String> deleteBill(Integer id) {
+        log.info("Inside deleteBill");
+        try {
+            Optional bill = billDao.findById(id);
+            if (bill.isPresent()) {
+                billDao.deleteById(id);
+                return RestaurantUtils.getResponseEntity("Bill deleted successfully.", HttpStatus.OK);
+            }
+            return RestaurantUtils.getResponseEntity("Bill id does not exist.", HttpStatus.OK);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return RestaurantUtils.getResponseEntity(RestaurantConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     private byte[] getPdfByteArray(String filePath) throws Exception {
         File file = new File(filePath);
         InputStream targetStream = new FileInputStream(file);
@@ -147,8 +160,8 @@ public class BillServiceImpl implements BillService {
         table.addCell((String) data.get("name"));
         table.addCell((String) data.get("category"));
         table.addCell((String) data.get("quantity"));
-        table.addCell(Double.toString((Double)data.get("price")));
-        table.addCell(Double.toString((Double)data.get("total")));
+        table.addCell(Double.toString((Double) data.get("price")));
+        table.addCell(Double.toString((Double) data.get("total")));
     }
 
     private void addTableHeader(PdfPTable table) {
@@ -202,7 +215,7 @@ public class BillServiceImpl implements BillService {
             bill.setEmail((String) requestMap.get("email"));
             bill.setContactNumber((String) requestMap.get("contactNumber"));
             bill.setPaymentMethod((String) requestMap.get("paymentMethod"));
-            bill.setTotal(Integer.parseInt((String) requestMap.get("totalAmount"))) ;
+            bill.setTotal(Integer.parseInt((String) requestMap.get("totalAmount")));
             bill.setProductDetails((String) requestMap.get("productDetails"));
             bill.setCreatedBy(jwtFilter.getCurrentUser());
             billDao.save(bill);
