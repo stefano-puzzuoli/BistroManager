@@ -21,7 +21,7 @@ export class SignupComponent implements OnInit {
   constructor(private formBuilder:FormBuilder,
     private router:Router,
     private userService:UserService,
-    private snackBarService:SnackbarService,
+    private snackbarService:SnackbarService,
     public dialogReference:MatDialogRef<SignupComponent>,
     private ngxService:NgxUiLoaderService
     ) { }
@@ -46,27 +46,29 @@ export class SignupComponent implements OnInit {
 
   handleSubmit(){
     this.ngxService.start();
-    var formData = this.signupForm.value;
+    var formDate = this.signupForm.value;
     var data = {
-      name : formData.name,
-      email : formData.email,
-      contactNumber : formData.contactNumber,
-      password : formData.password,
+      name: formDate.name,
+      email: formDate.email,
+      contactNumber: formDate.contactNumber,
+      password: formDate.password,
     }
-    this.userService.signup(data).subscribe((respone:any)=> {
-      this,this.ngxService.stop();
-      this.dialogReference.close();
-      this.responseMessage = respone?.message;
-      this.snackBarService.openSnackBar(this.responseMessage, "");
-      this.router.navigate(['/']);
-    }, (error)=> {
+    this.userService.signup(data).subscribe((response:any)=>{
       this.ngxService.stop();
-      if (error.error?.message) {
+      this.dialogReference.close();
+      this.responseMessage = response?.message;
+      this.snackbarService.openSnackBar(this.responseMessage,"");
+      // alert("Successfully Login");
+      this.router.navigate(['/cafe/login']);
+    },(error: { error: { message: any; }; })=>{
+      this.ngxService.stop();
+      if(error.error?.message){
         this.responseMessage = error.error?.message;
-      } else {
+      }else{
         this.responseMessage = GlobalConstants.genericError;
       }
-      this.snackBarService.openSnackBar(this.responseMessage, GlobalConstants.error);
+      // alert(this.responseMessage +" " +GlobalConstants.error);
+      this.snackbarService.openSnackBar(this.responseMessage , GlobalConstants.error);
     })
   }
 
