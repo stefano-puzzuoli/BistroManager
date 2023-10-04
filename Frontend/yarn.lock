@@ -5730,6 +5730,13 @@ neo-async@^2.5.0, neo-async@^2.6.1, neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+ngx-ui-loader@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-ui-loader/-/ngx-ui-loader-11.0.0.tgz#4dab1c80e1d60e0223d71b7fc2762c946f96e251"
+  integrity sha512-eU+X+BibMZ6ZqpPvWfpY0See1PPtT6HOq59bSLEHgqy6OF0kOgKBpscojvQzb5OUMc1jtTvjPTjNO2HFsFh2Sg==
+  dependencies:
+    tslib "^2.0.0"
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
