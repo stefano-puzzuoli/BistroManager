@@ -59,7 +59,7 @@ export class SignupComponent implements OnInit {
       this.responseMessage = response?.message;
       this.snackbarService.openSnackBar(this.responseMessage,"");
       // alert("Successfully Login");
-      this.router.navigate(['/cafe/login']);
+      this.router.navigate(['/eats-hub/login']);
     },(error: { error: { message: any; }; })=>{
       this.ngxService.stop();
       if(error.error?.message){
