@@ -6,6 +6,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { GlobalConstants } from 'src/app/shared/global-constants';
 import { ConfirmationComponent } from '../dialog/confirmation/confirmation.component';
 import { SnackbarService } from 'src/app/services/snackbar.service';
+import { ProductComponent } from '../dialog/product/product.component';
 
 @Component({
   selector: 'app-manage-product',
@@ -47,33 +48,33 @@ export class ManageProductComponent implements OnInit {
   }
 
   handleAddAction(){
-    // const dialogConfog = new MatDialogConfig();
-    // dialogConfog.data={
-    //   action:'Add'
-    // };
-    // dialogConfog.width = "850px";
-    // const dialogRef = this.dialog.open(ProductComponent , dialogConfog);
-    // this.router.events.subscribe(()=>{
-    //   dialogRef.close();
-    // }); 
-    // const sub = dialogRef.componentInstance.onAddProduct.subscribe((response)=>{
-    //   this.tableData();
-    // })
+    const dialogConfog = new MatDialogConfig();
+    dialogConfog.data={
+      action:'Add'
+    };
+    dialogConfog.width = "850px";
+    const dialogRef = this.dialog.open(ProductComponent , dialogConfog);
+    this.router.events.subscribe(()=>{
+      dialogRef.close();
+    }); 
+    const sub = dialogRef.componentInstance.onAddProduct.subscribe((response)=>{
+      this.tableData();
+    })
   }
   handleEditAction(values:any){
-    // const dialogConfog = new MatDialogConfig();
-    // dialogConfog.data={
-    //   action:'Edit',
-    //   data:values
-    // };
-    // dialogConfog.width = "850px";
-    // const dialogRef = this.dialog.open(ProductComponent , dialogConfog);
-    // this.router.events.subscribe(()=>{
-    //   dialogRef.close();
-    // }); 
-    // const sub = dialogRef.componentInstance.onEditProduct.subscribe((response)=>{
-    //   this.tableData();
-    // })
+    const dialogConfog = new MatDialogConfig();
+    dialogConfog.data={
+      action:'Edit',
+      data:values
+    };
+    dialogConfog.width = "850px";
+    const dialogRef = this.dialog.open(ProductComponent , dialogConfog);
+    this.router.events.subscribe(()=>{
+      dialogRef.close();
+    }); 
+    const sub = dialogRef.componentInstance.onEditProduct.subscribe((response)=>{
+      this.tableData();
+    })
   }
 
   handleDeleteAction(values:any){

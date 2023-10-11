@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
       //this.ngxService.stop();
       this.dialogRef.close();
       localStorage.setItem('token' , response.token);
-      //alert("Successfully Login");
+      //alert("Successfully Logged in");
       this.router.navigate(['/eats-hub/dashboard']);
     },(error: { error: { message: any; }; })=>{
       //this.ngxService.stop();
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
       }else{
         this.responseMessage = GlobalConstants.genericError;
       }
-      alert(this.responseMessage + " " + GlobalConstants.error);
+      // alert(this.responseMessage + " " + GlobalConstants.error);
       this.snackbarService.openSnackBar(this.responseMessage , GlobalConstants.error);
     })
 

@@ -88,7 +88,7 @@ responseMessage:any;
       }else{
         this.responseMessage = GlobalConstants.genericError;
       }
-      alert(this.responseMessage +" " +GlobalConstants.error);
+      // alert(this.responseMessage +" " +GlobalConstants.error);
       this.snackbarService.openSnackBar(this.responseMessage , GlobalConstants.error);
     });  
   }
