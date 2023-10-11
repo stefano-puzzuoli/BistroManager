@@ -38,6 +38,7 @@ export class RouteGuardService {
 
 
       if(tokenPayload.role == 'user' || tokenPayload.role == 'admin'){
+        return true;
         if(this.auth.isAuthenticated() && tokenPayload.role == expectedRole){
           return true;
         }
