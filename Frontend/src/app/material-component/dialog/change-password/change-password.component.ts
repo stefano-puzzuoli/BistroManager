@@ -55,7 +55,7 @@ export class ChangePasswordComponent implements OnInit {
     this.userService.changePassword(data).subscribe((response:any)=>{
       this.responseMessage = response?.message;
       this.dialogRef.close();
-      alert("Password Changed Successfully");
+      // alert("Password Changed Successfully");
       this.router.navigate(['/eats-hub/dashboard']);
       this.snackbarService.openSnackBar(this.responseMessage , "success");
     },(error)=>{
@@ -63,7 +63,7 @@ export class ChangePasswordComponent implements OnInit {
       if(error.error?.message){
         this.responseMessage = error.error?.message;
       }else{
-        alert(this.responseMessage +" " +GlobalConstants.error);
+        // alert(this.responseMessage +" " + GlobalConstants.error);
         this.snackbarService.openSnackBar(this.responseMessage , GlobalConstants.error);
       }
     }

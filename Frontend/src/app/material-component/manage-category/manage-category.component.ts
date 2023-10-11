@@ -46,37 +46,33 @@ export class ManageCategoryComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  handleAddAction(){}
-
-  handleEditAction(values:any){}
-
-  // handleAddAction(){
-  //   const dialogConfog = new MatDialogConfig();
-  //   dialogConfog.data={
-  //     action:'Add'
-  //   };
-  //   dialogConfog.width = "850px";
-  //   const dialogRef = this.dialog.open(CategoryComponent , dialogConfog);
-  //   this.router.events.subscribe(()=>{
-  //     dialogRef.close();
-  //   }); 
-  //   const sub = dialogRef.componentInstance.onAddCategory.subscribe((response)=>{
-  //     this.tableData();
-  //   })
-  // }
-  // handleEditAction(values:any){
-  //   const dialogConfog = new MatDialogConfig();
-  //   dialogConfog.data={
-  //     action:'Edit',
-  //     data:values
-  //   };
-  //   dialogConfog.width = "850px";
-  //   const dialogRef = this.dialog.open(CategoryComponent , dialogConfog);
-  //   this.router.events.subscribe(()=>{
-  //     dialogRef.close();
-  //   }); 
-  //   const sub = dialogRef.componentInstance.onEditCatefory.subscribe((response)=>{
-  //     this.tableData();
-  //   })
-  // }
+  handleAddAction(){
+    const dialogConfog = new MatDialogConfig();
+    dialogConfog.data={
+      action:'Add'
+    };
+    dialogConfog.width = "850px";
+    const dialogRef = this.dialog.open(CategoryComponent , dialogConfog);
+    this.router.events.subscribe(()=>{
+      dialogRef.close();
+    }); 
+    const sub = dialogRef.componentInstance.onAddCategory.subscribe((response)=>{
+      this.tableData();
+    })
+  }
+  handleEditAction(values:any){
+    const dialogConfog = new MatDialogConfig();
+    dialogConfog.data={
+      action:'Edit',
+      data:values
+    };
+    dialogConfog.width = "850px";
+    const dialogRef = this.dialog.open(CategoryComponent , dialogConfog);
+    this.router.events.subscribe(()=>{
+      dialogRef.close();
+    }); 
+    const sub = dialogRef.componentInstance.onEditCatefory.subscribe((response)=>{
+      this.tableData();
+    })
+  }
 }
