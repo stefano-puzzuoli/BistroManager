@@ -1,8 +1,8 @@
-# Eats Hub - The Restaurant Management System
+# Food Hub - The Restaurant Management System
 
 ## About The Project
 
-The Eats Hub Management System is a comprehensive solution designed to streamline restaurant operations. This system empowers restaurant owners to effortlessly create, modify, and print invoices, manage items and products, and maintain user access control.
+The Food Hub Management System is a comprehensive solution designed to streamline restaurant operations. This system empowers restaurant owners to effortlessly create, modify, and print invoices, manage items and products, and maintain user access control.
 
 ## Key Features
 
