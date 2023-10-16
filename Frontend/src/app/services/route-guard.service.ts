@@ -44,7 +44,7 @@ export class RouteGuardService {
         }
         
         this.snackbarService.openSnackBar(GlobalConstants.unauthroized , GlobalConstants.error);
-        this.router.navigate(['/eats-hub/dashboard']);
+        this.router.navigate(['/food-hub/dashboard']);
         return false;
       }
       else{

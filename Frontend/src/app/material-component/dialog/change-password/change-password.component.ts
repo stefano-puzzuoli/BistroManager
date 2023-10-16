@@ -56,7 +56,7 @@ export class ChangePasswordComponent implements OnInit {
       this.responseMessage = response?.message;
       this.dialogRef.close();
       // alert("Password Changed Successfully");
-      this.router.navigate(['/eats-hub/dashboard']);
+      this.router.navigate(['/food-hub/dashboard']);
       this.snackbarService.openSnackBar(this.responseMessage , "success");
     },(error)=>{
       console.log(error);
