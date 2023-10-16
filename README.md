@@ -4,6 +4,11 @@
 
 The Food Hub Management System is a comprehensive solution designed to streamline restaurant operations. This system empowers restaurant owners to effortlessly create, modify, and print invoices, manage items and products, and maintain user access control.
 
+### Video Walktrough
+[Watch the video.](https://www.loom.com/share/28f9dae7361e48f0b0564951b40789bc?sid=2fd9b170-a167-4ff2-8bf4-ce7a335c6156)
+
+Check out this video walkthrough of the Food Hub app to get a better understanding of its features and how to use it.
+
 ## Key Features
 
 ### Admin Features
