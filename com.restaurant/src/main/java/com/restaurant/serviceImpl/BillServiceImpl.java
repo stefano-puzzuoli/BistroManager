@@ -57,7 +57,7 @@ public class BillServiceImpl implements BillService {
                 PdfWriter.getInstance(document, new FileOutputStream(RestaurantConstants.SAVE_LOCATION + "\\" + fileName + ".pdf"));
                 document.open();
                 setRectangleInPdf(document);
-                Paragraph header = new Paragraph("Restaurant Management System", getFont("Header"));
+                Paragraph header = new Paragraph("Food Hub Receipt", getFont("Header"));
                 header.setAlignment(Element.ALIGN_CENTER);
                 document.add(header);
 
@@ -78,7 +78,7 @@ public class BillServiceImpl implements BillService {
 
                 document.add(table);
 
-                Paragraph footer = new Paragraph("Total : " + requestMap.get("totalAmount") + "\n" +
+                Paragraph footer = new Paragraph("Total : $" + requestMap.get("totalAmount") + "\n" +
                         "Thank you for visiting. Please visit again!", getFont("Data"));
                 document.add(footer);
                 document.close();

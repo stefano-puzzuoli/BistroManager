@@ -127,9 +127,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ResponseEntity<List<ProductWrapper>> getByCategory(Integer categoryId) {
         try {
-            if (jwtFilter.isAdmin()) {
+//            if (jwtFilter.isAdmin()) {
                 return new ResponseEntity<>(productDao.getByCategory(categoryId), HttpStatus.OK);
-            }
+//            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -139,14 +139,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ResponseEntity<ProductWrapper> getProductById(Integer id) {
         try {
-            if (jwtFilter.isAdmin()) {
+//            if (jwtFilter.isAdmin()) {
                 Optional<Product> product = productDao.findById(id);
                 if (product.isPresent()) {
                     return new ResponseEntity<>(productDao.getByProductId(id), HttpStatus.OK);
                 }
                 return new ResponseEntity<>(new ProductWrapper(), HttpStatus.OK);
-            }
-            return new ResponseEntity<>(new ProductWrapper(), HttpStatus.UNAUTHORIZED);
+//            }
+//            return new ResponseEntity<>(new ProductWrapper(), HttpStatus.UNAUTHORIZED);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
