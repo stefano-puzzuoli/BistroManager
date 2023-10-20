@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.restaurant</groupId>
-	<artifactId>com.restaurant</artifactId>
+	<artifactId>backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Restaurant Management System</name>
 	<description>Restaurant Management System Project</description>
