@@ -1,6 +1,6 @@
 package com.restaurant.dao;
 
-import com.restaurant.POJO.User;
+import com.restaurant.model.User;
 import com.restaurant.wrapper.UserWrapper;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

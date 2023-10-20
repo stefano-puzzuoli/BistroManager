@@ -1,6 +1,6 @@
 package com.restaurant.dao;
 
-import com.restaurant.POJO.Category;
+import com.restaurant.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

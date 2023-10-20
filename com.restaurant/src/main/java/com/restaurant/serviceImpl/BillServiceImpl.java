@@ -1,14 +1,11 @@
 package com.restaurant.serviceImpl;
 
-import com.google.common.base.Strings;
-import com.google.gson.JsonArray;
-import com.google.gson.annotations.JsonAdapter;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.restaurant.JWT.JwtFilter;
-import com.restaurant.POJO.Bill;
+import com.restaurant.model.Bill;
 import com.restaurant.constants.RestaurantConstants;
 import com.restaurant.dao.BillDao;
 import com.restaurant.service.BillService;
@@ -25,7 +22,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.lang.annotation.Documented;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Stream;

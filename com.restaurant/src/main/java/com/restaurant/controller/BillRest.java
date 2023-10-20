@@ -1,7 +1,6 @@
-package com.restaurant.rest;
+package com.restaurant.controller;
 
-import com.restaurant.POJO.Bill;
-import com.restaurant.POJO.Category;
+import com.restaurant.model.Bill;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

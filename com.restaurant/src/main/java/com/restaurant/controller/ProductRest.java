@@ -1,8 +1,6 @@
-package com.restaurant.rest;
+package com.restaurant.controller;
 
-import com.restaurant.POJO.Product;
 import com.restaurant.wrapper.ProductWrapper;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

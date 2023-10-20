@@ -1,4 +1,4 @@
-package com.restaurant.rest;
+package com.restaurant.controller;
 
 import com.restaurant.wrapper.UserWrapper;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package com.restaurant.dao;
 
-import com.restaurant.POJO.Bill;
+import com.restaurant.model.Bill;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 

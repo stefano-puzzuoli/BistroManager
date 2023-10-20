@@ -1,9 +1,9 @@
-package com.restaurant.restImpl;
+package com.restaurant.controllerImpl;
 
-import com.restaurant.POJO.Bill;
+import com.restaurant.model.Category;
 import com.restaurant.constants.RestaurantConstants;
-import com.restaurant.rest.BillRest;
-import com.restaurant.service.BillService;
+import com.restaurant.controller.CategoryRest;
+import com.restaurant.service.CategoryService;
 import com.restaurant.utils.RestaurantUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,15 +15,15 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class BillRestImpl implements BillRest {
+public class CategoryRestImpl implements CategoryRest {
 
     @Autowired
-    BillService billService;
+    CategoryService categoryService;
 
     @Override
-    public ResponseEntity<String> generateReport(Map<String, Object> requestMap) {
+    public ResponseEntity<String> addNewCategory(Map<String, String> requestMap) {
         try {
-            return billService.generateReport(requestMap);
+            return categoryService.addNewCategory(requestMap);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -31,29 +31,19 @@ public class BillRestImpl implements BillRest {
     }
 
     @Override
-    public ResponseEntity<List<Bill>> getBills() {
+    public ResponseEntity<List<Category>> getAllCategories(String filterValue) {
         try {
-            return billService.getBills();
+            return categoryService.getAllCategories(filterValue);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return new ResponseEntity<>(Collections.EMPTY_LIST, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(Collections.emptyList(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Override
-    public ResponseEntity<byte[]> getPdf(Map<String, Object> requestMap) {
+    public ResponseEntity<String> updateCategory(Map<String, String> requestMap) {
         try {
-            return billService.getPdf(requestMap);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<String> deleteBill(Integer id) {
-        try {
-            return billService.deleteBill(id);
+            return categoryService.updateCategory(requestMap);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

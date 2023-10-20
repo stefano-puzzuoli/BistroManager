@@ -1,6 +1,6 @@
-package com.restaurant.restImpl;
+package com.restaurant.controllerImpl;
 
-import com.restaurant.rest.DashboardRest;
+import com.restaurant.controller.DashboardRest;
 import com.restaurant.service.DashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

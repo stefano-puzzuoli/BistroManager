@@ -1,30 +1,29 @@
-package com.restaurant.restImpl;
+package com.restaurant.controllerImpl;
 
-import com.restaurant.POJO.Category;
+import com.restaurant.model.Bill;
 import com.restaurant.constants.RestaurantConstants;
-import com.restaurant.rest.CategoryRest;
-import com.restaurant.service.CategoryService;
+import com.restaurant.controller.BillRest;
+import com.restaurant.service.BillService;
 import com.restaurant.utils.RestaurantUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-public class CategoryRestImpl implements CategoryRest {
+public class BillRestImpl implements BillRest {
 
     @Autowired
-    CategoryService categoryService;
+    BillService billService;
 
     @Override
-    public ResponseEntity<String> addNewCategory(Map<String, String> requestMap) {
+    public ResponseEntity<String> generateReport(Map<String, Object> requestMap) {
         try {
-            return categoryService.addNewCategory(requestMap);
+            return billService.generateReport(requestMap);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -32,19 +31,29 @@ public class CategoryRestImpl implements CategoryRest {
     }
 
     @Override
-    public ResponseEntity<List<Category>> getAllCategories(String filterValue) {
+    public ResponseEntity<List<Bill>> getBills() {
         try {
-            return categoryService.getAllCategories(filterValue);
+            return billService.getBills();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return new ResponseEntity<>(Collections.emptyList(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(Collections.EMPTY_LIST, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Override
-    public ResponseEntity<String> updateCategory(Map<String, String> requestMap) {
+    public ResponseEntity<byte[]> getPdf(Map<String, Object> requestMap) {
         try {
-            return categoryService.updateCategory(requestMap);
+            return billService.getPdf(requestMap);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<String> deleteBill(Integer id) {
+        try {
+            return billService.deleteBill(id);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

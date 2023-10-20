@@ -4,7 +4,7 @@ import com.google.common.base.Strings;
 import com.restaurant.JWT.CustomerUsersDetailsService;
 import com.restaurant.JWT.JwtFilter;
 import com.restaurant.JWT.JwtUtil;
-import com.restaurant.POJO.User;
+import com.restaurant.model.User;
 import com.restaurant.constants.RestaurantConstants;
 import com.restaurant.dao.UserDao;
 import com.restaurant.service.UserService;

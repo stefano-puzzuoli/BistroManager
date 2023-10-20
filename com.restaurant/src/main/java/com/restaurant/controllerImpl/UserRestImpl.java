@@ -1,7 +1,7 @@
-package com.restaurant.restImpl;
+package com.restaurant.controllerImpl;
 
 import com.restaurant.constants.RestaurantConstants;
-import com.restaurant.rest.UserRest;
+import com.restaurant.controller.UserRest;
 import com.restaurant.service.UserService;
 import com.restaurant.utils.RestaurantUtils;
 import com.restaurant.wrapper.UserWrapper;

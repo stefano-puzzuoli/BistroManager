@@ -1,14 +1,13 @@
 package com.restaurant.serviceImpl;
 
 import com.restaurant.JWT.JwtFilter;
-import com.restaurant.POJO.Category;
-import com.restaurant.POJO.Product;
+import com.restaurant.model.Category;
+import com.restaurant.model.Product;
 import com.restaurant.constants.RestaurantConstants;
 import com.restaurant.dao.ProductDao;
 import com.restaurant.service.ProductService;
 import com.restaurant.utils.RestaurantUtils;
 import com.restaurant.wrapper.ProductWrapper;
-import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

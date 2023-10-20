@@ -1,6 +1,6 @@
 package com.restaurant.service;
 
-import com.restaurant.POJO.Bill;
+import com.restaurant.model.Bill;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

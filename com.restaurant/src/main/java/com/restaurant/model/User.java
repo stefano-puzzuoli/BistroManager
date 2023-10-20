@@ -1,4 +1,4 @@
-package com.restaurant.POJO;
+package com.restaurant.model;
 
 
 import lombok.Data;
